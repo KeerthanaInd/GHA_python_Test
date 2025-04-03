@@ -1,0 +1,33 @@
+name: Launch Chrome and Generate Report
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Allows manual trigger from GitHub UI
+
+jobs:
+  run-chrome:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: |
+          pip install selenium webdriver-manager
+
+      - name: Run Chrome launch script
+        run: python launch_chrome.py
+
+      - name: Upload Screenshot & Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: Chrome-Test-Report
+          path: reports/
