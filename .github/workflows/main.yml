@@ -27,7 +27,7 @@ jobs:
         run: python launch_chrome.py
 
       - name: Upload Screenshot & Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # ✅ Updated to v4
         with:
           name: Chrome-Test-Report
           path: reports/
